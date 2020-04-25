@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StepNavigationService } from 'src/app/services/step-navigation/step-navigation.service';
 import { Subscription } from 'rxjs';
-import { Step } from 'src/app/services/step';
-
 
 @Component({
   selector: 'app-application',

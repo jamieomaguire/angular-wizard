@@ -15,9 +15,13 @@ export class StepNavigationService {
 
   constructor(private readonly router: Router, private readonly location: Location) {
     this.getJourneySteps();
+
     this.initialiseCurrentStep(this.router.url === '/' ? this.location.path() : this.router.url);
 
-    this.checkIfFirstOrLastStep();
+    if (this.currentStep) {
+      this.checkIfFirstOrLastStep();
+    }
+
     this.router.events.subscribe((event: any) => {
       const newRoute = this.getNewRoute(event);
       if (newRoute) {
@@ -67,8 +71,9 @@ export class StepNavigationService {
   }
 
   public isStepAccessible(url: string) {
-    return this.journey.steps
-      .find(s => s.url === url)
-      .accessible;
+    const step = this.journey.steps
+      .find(s => s.url === url);
+
+    return step ? step.accessible : false;
   }
 }
