@@ -9,22 +9,23 @@ import json from '../fake-senior-journey.json';
   providedIn: 'root'
 })
 export class StepNavigationService {
-
-  public routeChange: Observable<string>;
   public currentStep: Step;
   public journey: any;
+  public onLastStep: boolean;
+  public onFirstStep: boolean;
 
   constructor(private readonly router: Router) {
     console.log('being constructed');
     this.getJourneySteps();
-    this.currentStep = this.journey.steps.find(s => s.url === this.router.url)
-    this.routeChange = new Observable((observer) => {
-      this.router.events.subscribe((event: any) => {
-        const newRoute = this.getNewRoute(event);
-        if (newRoute) {
-          observer.next(newRoute);
-        }
-      });
+    this.initialiseCurrentStep();
+    this.checkIfFirstOrLastStep();
+    this.router.events.subscribe((event: any) => {
+      const newRoute = this.getNewRoute(event);
+      if (newRoute) {
+        console.log('updating current step');
+        this.setCurrentStep(newRoute);
+        this.checkIfFirstOrLastStep();
+      }
     });
   }
 
@@ -37,18 +38,31 @@ export class StepNavigationService {
   }
 
   public getNextStep(): any {
-    console.log('getting next step');
     return this.journey.steps.find(s => s.order === this.currentStep.order + 1);
   }
 
   public getPreviousStep(): any {
-    console.log('getting previous step');
     return this.journey.steps.find(s => s.order === this.currentStep.order - 1);
   }
 
   public getJourneySteps() {
-    // hard code entry level type
-    console.log(json);
     this.journey = json;
+  }
+
+  private setCurrentStep(url: string) {
+    const currentStep = this.journey.steps
+      .find(s => s.url.toLowerCase() === url.toLowerCase());
+
+    const typedCurrentStep = new Step(currentStep.url, currentStep.order);
+    this.currentStep = typedCurrentStep;
+  }
+
+  private initialiseCurrentStep(): void {
+    this.currentStep = this.journey.steps.find(s => s.url === this.router.url);
+  }
+
+  private checkIfFirstOrLastStep(): void {
+    this.onFirstStep = this.currentStep.order === 0;
+    this.onLastStep = this.currentStep.order === this.journey.steps.length - 1;
   }
 }

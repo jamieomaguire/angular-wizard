@@ -18,5 +18,4 @@ export class NextStepComponent implements OnInit {
     const nextStep = this.navigationService.getNextStep();
     this.router.navigateByUrl(nextStep.url);
   }
-
 }

@@ -15,16 +15,15 @@ export class ApplicationComponent implements OnInit {
 
   public routeSubscription: Subscription;
 
+  public get onFirstStep(): boolean {
+    return this.navigationService.onFirstStep;
+  }
+
+  public get onLastStep(): boolean {
+    return this.navigationService.onLastStep;
+  }
+
   ngOnInit() {
-    this.routeSubscription = this.navigationService.routeChange
-      .subscribe((newUrl) => {
-        const currentStep =  this.navigationService.journey.steps
-          .find(s => s.url.toLowerCase() === newUrl.toLowerCase());
-
-        const typedCurrentStep = new Step(currentStep.url, currentStep.order);
-        this.navigationService.currentStep = typedCurrentStep;
-      });
-
   }
 
 }

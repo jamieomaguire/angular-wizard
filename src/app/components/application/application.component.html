@@ -1,4 +1,4 @@
 <p>application works!</p>
 <router-outlet></router-outlet>
-<app-previous-step></app-previous-step>
-<app-next-step></app-next-step>
+<app-previous-step *ngIf="!onFirstStep"></app-previous-step>
+<app-next-step *ngIf="!onLastStep"></app-next-step>
