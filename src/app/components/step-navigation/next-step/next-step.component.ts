@@ -15,9 +15,8 @@ export class NextStepComponent implements OnInit {
   }
 
   public goToNextStep() {
-    console.log('going to next step!');
-    this.navigationService.getNextStep();
-    this.router.navigateByUrl('/application/experience');
+    const nextStep = this.navigationService.getNextStep();
+    this.router.navigateByUrl(nextStep.url);
   }
 
 }

@@ -1,0 +1,38 @@
+{
+  "id": 1,
+  "journeyType": "entry-level",
+  "steps": [
+    {
+      "url": "/application/start",
+      "order": 0
+    },
+    {
+      "url": "/application/details",
+      "order": 1
+    },
+    {
+      "url": "/application/education",
+      "order": 2
+    },
+    {
+      "url": "/application/experience",
+      "order": 3
+    },
+    {
+      "url": "/application/accomplishments",
+      "order": 4
+    },
+    {
+      "url": "/application/references",
+      "order": 5
+    },
+    {
+      "url": "/application/personal-statement",
+      "order": 6
+    },
+    {
+      "url": "/application/submit",
+      "order": 7
+    }
+  ]
+}

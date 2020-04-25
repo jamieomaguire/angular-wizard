@@ -15,8 +15,7 @@ export class PreviousStepComponent implements OnInit {
   }
 
   public goToPreviousStep() {
-    console.log('going to previous step!');
-    this.navigationService.getPreviousStep();
-    this.router.navigateByUrl('/application/details');
+    const previousStep = this.navigationService.getPreviousStep();
+    this.router.navigateByUrl(previousStep.url);
   }
 }

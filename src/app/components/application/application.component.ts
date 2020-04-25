@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StepNavigationService } from 'src/app/services/step-navigation/step-navigation.service';
 import { Subscription } from 'rxjs';
+import { Step } from 'src/app/services/step';
 
 
 @Component({
@@ -16,9 +17,14 @@ export class ApplicationComponent implements OnInit {
 
   ngOnInit() {
     this.routeSubscription = this.navigationService.routeChange
-      .subscribe((event) => {
-        console.log(event);
+      .subscribe((newUrl) => {
+        const currentStep =  this.navigationService.journey.steps
+          .find(s => s.url.toLowerCase() === newUrl.toLowerCase());
+
+        const typedCurrentStep = new Step(currentStep.url, currentStep.order);
+        this.navigationService.currentStep = typedCurrentStep;
       });
+
   }
 
 }
