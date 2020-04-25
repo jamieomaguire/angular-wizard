@@ -12,21 +12,24 @@ import { AccomplishmentsComponent } from './components/steps/accomplishments/acc
 import { ReferencesComponent } from './components/steps/references/references.component';
 import { PersonalStatementComponent } from './components/steps/personal-statement/personal-statement.component';
 import { SubmitComponent } from './components/steps/submit/submit.component';
+import { StepAccessGuard } from './guards/step-access.guard';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'application', component: ApplicationComponent, children: [
-    { path: 'start', component: StartApplicationComponent },
-    { path: 'details', component: PersonalDetailsComponent },
-    { path: 'education', component: EducationComponent },
-    { path: 'experience', component: ExperienceComponent },
-    { path: 'managerial', component: ManagerialTrainingComponent },
-    { path: 'extra-curricular', component: ExtraCurricularComponent },
-    { path: 'accomplishments', component: AccomplishmentsComponent },
-    { path: 'references', component: ReferencesComponent },
-    { path: 'personal-statement', component: PersonalStatementComponent },
-    { path: 'submit', component: SubmitComponent }
-  ]}
+  {
+    path: 'application', component: ApplicationComponent, canActivateChild: [StepAccessGuard], children: [
+      { path: 'start', component: StartApplicationComponent },
+      { path: 'details', component: PersonalDetailsComponent },
+      { path: 'education', component: EducationComponent },
+      { path: 'experience', component: ExperienceComponent },
+      { path: 'managerial', component: ManagerialTrainingComponent },
+      { path: 'extra-curricular', component: ExtraCurricularComponent },
+      { path: 'accomplishments', component: AccomplishmentsComponent },
+      { path: 'references', component: ReferencesComponent },
+      { path: 'personal-statement', component: PersonalStatementComponent },
+      { path: 'submit', component: SubmitComponent }
+    ]
+  }
 ];
 
 @NgModule({

@@ -15,6 +15,8 @@ import { PersonalStatementComponent } from './components/steps/personal-statemen
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ApplicationComponent } from './components/application/application.component';
 import { SubmitComponent } from './components/steps/submit/submit.component';
+import { NextStepComponent } from './components/step-navigation/next-step/next-step.component';
+import { PreviousStepComponent } from './components/step-navigation/previous-step/previous-step.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SubmitComponent } from './components/steps/submit/submit.component';
     PersonalStatementComponent,
     WelcomeComponent,
     ApplicationComponent,
-    SubmitComponent
+    SubmitComponent,
+    NextStepComponent,
+    PreviousStepComponent
   ],
   imports: [
     BrowserModule,
