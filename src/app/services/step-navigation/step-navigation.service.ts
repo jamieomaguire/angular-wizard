@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Step } from '../step';
 import json from '../fake-senior-journey.json';
-// import { Journey } from '../journey';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,10 @@ export class StepNavigationService {
   public onLastStep: boolean;
   public onFirstStep: boolean;
 
-  constructor(private readonly router: Router) {
-    console.log('being constructed');
+  constructor(private readonly router: Router, private readonly location: Location) {
     this.getJourneySteps();
-    this.initialiseCurrentStep();
+    this.initialiseCurrentStep(this.router.url === '/' ? this.location.path() : this.router.url);
+
     this.checkIfFirstOrLastStep();
     this.router.events.subscribe((event: any) => {
       const newRoute = this.getNewRoute(event);
@@ -47,6 +46,7 @@ export class StepNavigationService {
 
   public getJourneySteps() {
     this.journey = json;
+    console.log(this.journey)
   }
 
   private setCurrentStep(url: string) {
@@ -57,8 +57,8 @@ export class StepNavigationService {
     this.currentStep = typedCurrentStep;
   }
 
-  private initialiseCurrentStep(): void {
-    this.currentStep = this.journey.steps.find(s => s.url === this.router.url);
+  public initialiseCurrentStep(url: string): void {
+    this.currentStep = this.journey.steps.find(s => s.url === url);
   }
 
   private checkIfFirstOrLastStep(): void {
