@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Step } from '../step';
-import json from '../fake-senior-journey.json';
+import json from '../fake-entry-journey.json';
 import { Location } from '@angular/common';
 
 @Injectable({
@@ -64,5 +64,11 @@ export class StepNavigationService {
   private checkIfFirstOrLastStep(): void {
     this.onFirstStep = this.currentStep.order === 0;
     this.onLastStep = this.currentStep.order === this.journey.steps.length - 1;
+  }
+
+  public isStepAccessible(url: string) {
+    return this.journey.steps
+      .find(s => s.url === url)
+      .accessible;
   }
 }

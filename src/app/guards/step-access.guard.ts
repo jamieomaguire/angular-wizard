@@ -13,8 +13,7 @@ export class StepAccessGuard implements CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(next);
-      console.log('allowed access to step!');
-      return true;
+      console.log('checking access to step!');
+      return this.navigationService.isStepAccessible(state.url);
   }
 }
