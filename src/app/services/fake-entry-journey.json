@@ -29,26 +29,26 @@
     {
       "url": "/application/extra-curricular",
       "order": 4,
-      "complete": false,
+      "complete": true,
       "accessible": true
     },
     {
       "url": "/application/references",
       "order": 5,
-      "complete": false,
-      "accessible": false
+      "complete": true,
+      "accessible": true
     },
     {
       "url": "/application/personal-statement",
       "order": 6,
-      "complete": false,
-      "accessible": false
+      "complete": true,
+      "accessible": true
     },
     {
       "url": "/application/submit",
       "order": 7,
-      "complete": false,
-      "accessible": false
+      "complete": true,
+      "accessible": true
     }
   ]
 }
