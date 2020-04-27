@@ -1,4 +1,8 @@
 <p>application works!</p>
 <router-outlet></router-outlet>
-<app-previous-step *ngIf="!onFirstStep"></app-previous-step>
-<app-next-step *ngIf="!onLastStep"></app-next-step>
+<a routerLink="/application/start" *ngIf="!applicationInProgress">Start Application</a>
+<ng-container *ngIf="applicationInProgress">
+  <app-previous-step *ngIf="!onFirstStep"></app-previous-step>
+  <app-next-step *ngIf="!onLastStep"></app-next-step>
+</ng-container>
+

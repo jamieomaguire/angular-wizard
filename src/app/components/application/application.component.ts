@@ -13,6 +13,10 @@ export class ApplicationComponent implements OnInit {
 
   public routeSubscription: Subscription;
 
+  public get applicationInProgress(): boolean {
+    return this.navigationService.currentStep.order > -1;
+  }
+
   public get onFirstStep(): boolean {
     return this.navigationService.onFirstStep;
   }
