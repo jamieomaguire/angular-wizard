@@ -55,9 +55,13 @@ export class StepNavigationService {
 
   private setCurrentStep(url: string) {
     const currentStep = this.journey.steps
-      .find(s => s.url.toLowerCase() === url.toLowerCase());
+      .find(s => s.url.toLowerCase() === url.toLowerCase()) || {
+        order: -1,
+        url: 'application'
+      };
 
     const typedCurrentStep = new Step(currentStep.url, currentStep.order);
+
     this.currentStep = typedCurrentStep;
   }
 
